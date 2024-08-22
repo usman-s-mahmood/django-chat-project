@@ -84,7 +84,7 @@ setInterval(function(){
             }
         },
         error: function(response){
-            alert('An error occured')
+            console.log('An error occured')
         }
     });
 },1000);
@@ -136,7 +136,26 @@ setInterval(function(){
 </div>
 
 
-</body>
+</body> {% comment "" %}
+<script>
+    $(document).on('submit', '#post-form', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST'
+            url: '/send',
+            data: {
+                username: $('#username').val(),
+                room_id: $('#room_id').val(),
+                message: $('#message').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function(data) {
+
+            }
+        });
+        document.getElementById('message').value = '';
+    })
+</script> {% endcomment %}
 
 <script type="text/javascript">
   $(document).on('submit','#post-form',function(e){
